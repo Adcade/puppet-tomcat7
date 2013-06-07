@@ -1,10 +1,9 @@
-define tomcat7::webapp($path) {
-
-  include tomcat7
+define tomcat7::webapp($name, $path) {
 
   file { "/var/lib/tomcat7/webapps/${name}.war":
-    owner => 'root',
+    owner => 'tomcat7',
     source => $path,
+    notify => Service["tomcat7"]
   }
 
 }
