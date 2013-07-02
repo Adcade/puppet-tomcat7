@@ -41,9 +41,11 @@ class tomcat7 (
     $xmx           = '1G',
     $xms           = '256M',
 ) {
+
   package { 'tomcat7':
     ensure  => installed,
     require => [
+      File['/etc/default/tomcat7'],
       Package['authbind'],
       Package['libtcnative'],
     ],
@@ -72,14 +74,13 @@ class tomcat7 (
 
   file { '/etc/default/tomcat7':
     owner   => 'root',
-    require => Package['tomcat7'],
     notify  => Service['tomcat7'],
     content => template('tomcat7/default.erb'),
   }
 
   service { 'tomcat7':
-    ensure => $ensure,
-    enable => $enable,
+    ensure  => $ensure,
+    enable  => $enable,
     require => Package['tomcat7'],
   }
 
