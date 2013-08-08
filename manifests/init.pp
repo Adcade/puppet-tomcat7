@@ -33,13 +33,15 @@
 #
 
 class tomcat7 (
-    $enable        = true,
-    $ensure        = running,
-    $http_port     = 8080,
-    $https_port    = 8443,
-    $install_admin = true,
-    $xmx           = '1G',
-    $xms           = '256M',
+    $enable           = true,
+    $ensure           = running,
+    $http_port        = 8080,
+    $https_port       = 8443,
+    $install_admin    = true,
+    $xmx              = '1G',
+    $xms              = '256M',
+    $tomcatUsername  = 'tomcat',
+    $tomcatPassword  = 'tomcat',
 ) {
 
   package { 'tomcat7':
@@ -82,6 +84,12 @@ class tomcat7 (
     ensure  => $ensure,
     enable  => $enable,
     require => Package['tomcat7'],
+  }
+
+  file { '/var/lib/tomcat7/conf/tomcat-users.xml':
+    require => Package['tomcat7'],
+    content => template('tomcat7/tomcat-users.xml.erb'),
+    ensure  => present,
   }
 
 }
