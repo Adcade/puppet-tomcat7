@@ -18,5 +18,6 @@
 <tomcat-users>
   <role rolename="manager-gui"/>
   <role rolename="manager-script"/>
-  <user username="<%= @tomcatPassword %>" password="<%= @tomcatPassword %>" roles="manager-gui,manager-script"/>
+  <user username="<%= @tomcatPassword %>" password="<%= @tomcatPassword %>" roles="manager-gui"/>
+  <user username="jenkins" password="jenkins" roles="manager-script"/>
 </tomcat-users>
