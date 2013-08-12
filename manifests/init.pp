@@ -42,6 +42,8 @@ class tomcat7 (
     $xms              = '256M',
     $tomcatUsername  = 'tomcat',
     $tomcatPassword  = 'tomcat',
+    $jenkinsUsername = 'jenkins',
+    $jenkinsPassword = 'jenkins'
 ) {
 
   package { 'tomcat7':
